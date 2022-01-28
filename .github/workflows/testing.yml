@@ -26,6 +26,7 @@ jobs:
       - name: Update changes in GitHub repository
         if: steps.git-check.outputs.modified == 'true'
         run: |
+          git checkout ${{ github.ref_name	}}
           git config --global user.name 'Your Name' 
           git config --global user.email 'Your Email for GitHub'
           git add -A
