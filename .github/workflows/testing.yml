@@ -20,14 +20,14 @@ jobs:
         with:
           linters: isort
           run: isort --only-modified .
-      - name: Commit changes
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$(if [ -n "$(git status --porcelain)" ]; then echo "true"; else echo "false"; fi)
+      - name: Update changes in GitHub repository
+        if: steps.git-check.outputs.modified == 'true'
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -A && git diff-index --cached --quiet HEAD || git commit -m 'isort'
-
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.5.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          git config --global user.name 'Your Name' 
+          git config --global user.email 'Your Email for GitHub'
+          git add -A
+          git commit -m '[automated commit] add configs generated using jsonnet & GitHub workflow'
+          git push
