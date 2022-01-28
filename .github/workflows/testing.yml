@@ -25,11 +25,6 @@ jobs:
           echo ${{ github.ref_namehead_ref }}
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git pull --rebase
           git add -A && git diff-index --cached --quiet HEAD || git commit -m 'isort'
-
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.5.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.head_ref }}
+          git pull --rebase
+          git push ${{ github.head_ref }}
