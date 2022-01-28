@@ -30,4 +30,4 @@ jobs:
           git config --global user.email 'Your Email for GitHub'
           git add -A
           git commit -m '[automated commit] add configs generated using jsonnet & GitHub workflow'
-          git push
+          git push ${{ github.ref_name	}}
