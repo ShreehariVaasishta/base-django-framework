@@ -27,5 +27,4 @@ jobs:
           git config --local user.name "GitHub Action"
           git add -A
           git commit -m 'isort'
-          git pull --rebase
-          git push ${{ github.head_ref }}
+          git push
