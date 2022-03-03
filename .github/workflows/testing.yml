@@ -5,24 +5,13 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  isort:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
         with:
-          python-version: "3.8"
-      - run: python -m pip install isort
-      - name: isort
-        uses: liskin/gh-problem-matcher-wrap@v1
+          python-version: 3.8
+      - uses: isort/isort-action@master
         with:
-          linters: isort
-          run: isort --only-modified .
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Apply isort changes
-          commit_user_name: github-actions[bot]
-          commit_user_email: github-actions[bot]@users.noreply.github.com
+          requirementsFiles: "requirements.txt"

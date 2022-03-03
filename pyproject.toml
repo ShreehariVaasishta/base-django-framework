@@ -1,0 +1,13 @@
+[tool.isort]
+profile = "black"
+default_section = THIRDPARTY
+known_first_party = questions  # change it for the name of your django project, shoud be comma separated
+known_django = django
+sections = FUTURE,STDLIB,DJANGO,THIRDPARTY,FIRSTPARTY,LOCALFOLDER
+skip = [".gitignore"]
+skip_glob = ["docs/*"]
+include_trailing_comma = True
+combine_as_imports = True
+
+[tool.black]
+line-length = 119
